@@ -1,7 +1,9 @@
-Drukcija sintaksa
-Vite imao update
-https://v2.chakra-ui.com/getting-started/vite-guide
+Documentation for chakra:
+https://v2.chakra-ui.com/docs/components/container/usage
 
-Nesta nije uredu...
+1:04:28 - Disableing prop types error (in eslint.config.js)
+1:08:04 - He didnt implement this copy link feature... I did. cuz im a badass
 
-12:30
+
+Current timestamp:
+1:10:22
