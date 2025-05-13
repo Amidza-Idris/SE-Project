@@ -28,6 +28,7 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      "react/prop-types": 'off',  // Disable prop-types as we use TypeScript for type checking 1:04:50
     },
   },
 ]
