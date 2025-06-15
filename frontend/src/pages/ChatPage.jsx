@@ -9,7 +9,7 @@ import useShowToast from "../hooks/useShowToast";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { conversationsAtom, selectedConversationAtom } from "../atoms/messagesAtom";
 import userAtom from "../atoms/userAtom";
-import { useSocket } from "../hooks/useSocket";
+import { useSocket } from "../context/SocketContext.jsx";
 
 const ChatPage = () => {
 	const [searchingUser, setSearchingUser] = useState(false);

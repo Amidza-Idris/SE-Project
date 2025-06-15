@@ -1,10 +1,13 @@
-// context/SocketContext.js
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import io from "socket.io-client";
 import userAtom from "../atoms/userAtom";
 
 const SocketContext = createContext();
+
+export const useSocket = () => {
+	return useContext(SocketContext);
+};
 
 export const SocketContextProvider = ({ children }) => {
 	const [socket, setSocket] = useState(null);
@@ -14,7 +17,6 @@ export const SocketContextProvider = ({ children }) => {
 	useEffect(() => {
 		// Ensure the socket connection is on production url: https://threads-se.onrender.com/
 		// Default to localhost for development:			  http://localhost:5000/
-		if (!user?._id) return;
 		const socket = io("https://threads-se.onrender.com/", {
 			query: {
 				userId: user?._id,
