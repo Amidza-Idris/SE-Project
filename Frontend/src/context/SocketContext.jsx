@@ -1,14 +1,10 @@
-import React from "react";
-import { createContext, useContext, useEffect, useState } from "react";
+// context/SocketContext.js
+import { createContext, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import io from "socket.io-client";
 import userAtom from "../atoms/userAtom";
 
-const SocketContext = createContext();
-
-export const useSocket = () => {
-	return useContext(SocketContext);
-};
+export const SocketContext = createContext();
 
 export const SocketContextProvider = ({ children }) => {
 	const [socket, setSocket] = useState(null);
@@ -30,5 +26,9 @@ export const SocketContextProvider = ({ children }) => {
 		return () => socket && socket.close();
 	}, [user?._id]);
 
-	return <SocketContext.Provider value={{ socket, onlineUsers }}>{children}</SocketContext.Provider>;
+	return (
+		<SocketContext.Provider value={{ socket, onlineUsers }}>
+			{children}
+		</SocketContext.Provider>
+	);
 };

@@ -25,27 +25,25 @@ cloudinary.config({
   api_secret: "pEtQQYjuoeiKhQrJwY_nmBaJF5g",
 });
 
-// Middleware
-app.use(express.json()); // Middleware to parse JSON bodies
-app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded bodies
-app.use(cookieParser()); // Middleware to parse cookies
+// Middlewares
+app.use(express.json({ limit: "50mb" })); // To parse JSON data in the req.body
+app.use(express.urlencoded({ extended: true })); // To parse form data in the req.body
+app.use(cookieParser());
 
 // Routes
-app.use("/api/users", userRoutes); // User-related routes
-app.use("/api/posts", postRoutes); // Post-related routes
-app.use("/api/messages", messageRoutes); // Message-related routes
+app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/messages", messageRoutes);
+
+// http://localhost:5000 => backend,frontend
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+	app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-  // react app
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-  });
+	// react app
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+	});
 }
 
-server.listen(PORT, () =>
-  console.log(`Server started at http://localhost:${PORT}`)
-);
-
-export default app; // Export the app for testing purposes
+server.listen(PORT, () => console.log(`Server started at http://localhost:${PORT}`));

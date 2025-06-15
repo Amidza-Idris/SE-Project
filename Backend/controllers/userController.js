@@ -150,8 +150,8 @@ const followUnFollowUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { name, email, username, password, bio, profilePic } = req.body;
-  // let { profilePic } = req.body;
+  const { name, email, username, password, bio } = req.body;
+  let { profilePic } = req.body;
 
   const userId = req.user._id;
   try {
@@ -203,8 +203,7 @@ const updateUser = async (req, res) => {
     // password should be null in response
     user.password = null;
 
-    //res.status(200).json(user);
-    res.status(200).json({ message: "User updated successfully", user});
+    res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });
     console.log("Error in updateUser: ", err.message);
