@@ -2,7 +2,7 @@ import User from "../models/userModel.js";
 import Post from "../models/postModel.js";
 import bcrypt from "bcryptjs";
 import generateTokenAndSetCookie from "../utils/helpers/generateTokenAndSetCookie.js";
-//import { v2 as cloudinary } from "cloudinary";
+import { v2 as cloudinary } from "cloudinary";
 import mongoose from "mongoose";
 
 const getUserProfile = async (req, res) => {
@@ -168,7 +168,7 @@ const updateUser = async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, salt);
       user.password = hashedPassword;
     }
-/*
+
     if (profilePic) {
       if (user.profilePic) {
         await cloudinary.uploader.destroy(
@@ -179,16 +179,15 @@ const updateUser = async (req, res) => {
       const uploadedResponse = await cloudinary.uploader.upload(profilePic);
       profilePic = uploadedResponse.secure_url;
     }
-*/
+
     user.name = name || user.name;
     user.email = email || user.email;
     user.username = username || user.username;
-    // user.profilePic = profilePic || user.profilePic;
     user.profilePic = profilePic || user.profilePic;
     user.bio = bio || user.bio;
 
     user = await user.save();
-/*
+
     // Find all posts that this user replied and update username and userProfilePic fields
     await Post.updateMany(
       { "replies.userId": userId },
@@ -203,7 +202,7 @@ const updateUser = async (req, res) => {
 
     // password should be null in response
     user.password = null;
-*/
+
     //res.status(200).json(user);
     res.status(200).json({ message: "User updated successfully", user});
   } catch (err) {
