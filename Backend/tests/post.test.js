@@ -5,12 +5,23 @@ import Post from "../models/postModel.js";
 import User from "../models/userModel.js";
 
 describe("Post API", function () {
+  let userData = {
+    name: "Test User",
+    email: "testuser@example.com",
+    username: "testuser",
+    password: "password123",
+  };
   let user;
+  let token;
   let post;
 
   before(async function () {
-    user = new User({ username: "testuser", password: "password" });
-    await user.save();
+    // Create a user via the API to ensure password hashing and any hooks run
+    const res = await request(app).post("/api/users/signup").send(userData);
+    user = res.body;
+    // If your login returns a token, you can extract it here for authenticated routes
+    // const loginRes = await request(app).post("/api/users/login").send({ username: userData.username, password: userData.password });
+    // token = loginRes.body.token;
   });
 
   after(async function () {
