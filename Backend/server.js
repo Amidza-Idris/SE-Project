@@ -20,9 +20,9 @@ const __dirname = path.resolve();
 
 // Cloudinary configuration not ready yet
 cloudinary.config({
-  cloud_name: "dweb8jnrw",
-  api_key: "748484417788973",
-  api_secret: "pEtQQYjuoeiKhQrJwY_nmBaJF5g",
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 // Middlewares
@@ -38,12 +38,10 @@ app.use("/api/messages", messageRoutes);
 // http://localhost:5000 => backend,frontend
 
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "/frontend/dist")));
-
-	// react app
-	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-	});
+	app.use(express.static(path.join(__dirname, "./frontend/dist")));
+  	app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "./frontend/dist/index.html"));
+  });
 }
 
 server.listen(PORT, () => console.log(`Server started at http://localhost:${PORT}`));
