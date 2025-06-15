@@ -1,3 +1,4 @@
+import React from "react";
 import { Avatar, Box, Button, Divider, Flex, Image, Spinner, Text } from "@chakra-ui/react";
 import Actions from "../components/Actions";
 import { useEffect } from "react";

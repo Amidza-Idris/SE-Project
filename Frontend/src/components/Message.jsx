@@ -1,3 +1,4 @@
+import React from "react";
 import { Avatar, Box, Flex, Image, Skeleton, Text } from "@chakra-ui/react";
 import { selectedConversationAtom } from "../atoms/messagesAtom";
 import { useRecoilValue } from "recoil";
