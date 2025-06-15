@@ -54,3 +54,4 @@ server.listen(PORT, () =>
   console.log(`Server started at http://localhost:${PORT}`)
 );
 */
+export default app; // Export the app for testing purposes
